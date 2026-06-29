@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="420" viewBox="0 0 1600 420">
+  <defs>
+    <marker id="arr" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#173b72"/>
+    </marker>
+    <style>
+      .bg{fill:#f7fbff}.title{font:700 28px Segoe UI,Arial;fill:#0b2f68}.label{font:700 16px Segoe UI,Arial;fill:#0b2f68}.small{font:500 13px Segoe UI,Arial;fill:#22344f}.mono{font:500 12px Consolas,monospace;fill:#10233f}.panel{fill:#fff;stroke:#c8d6ea;stroke-width:2}.lb{fill:#eef5ff;stroke:#7ea4dc;stroke-width:1.5}.nam{fill:#eef5ff;stroke:#b9cdea;stroke-width:1.5}.dir{fill:#eaf8f0;stroke:#bce7cb;stroke-width:1.5}.aa{fill:#eef5ff;stroke:#b9cdea;stroke-width:1.5}.header{fill:#123f96}.line{stroke:#173b72;stroke-width:3;fill:none;marker-end:url(#arr)}.dash{stroke:#3a78d4;stroke-width:3;stroke-dasharray:6 7;fill:none;marker-end:url(#arr)}.icon{fill:#174ea6}.shield{fill:#fff;stroke:#174ea6;stroke-width:3}.check{stroke:#174ea6;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="420" rx="30"/>
+  <text x="36" y="46" class="title">3. Target State - NAM ใหม่ (Authentication Center)</text>
+
+  <text x="62" y="120" class="label">Users</text>
+  <circle cx="70" cy="162" r="18" class="icon"/>
+  <circle cx="110" cy="162" r="18" class="icon"/>
+  <circle cx="90" cy="132" r="18" class="icon"/>
+  <path d="M42 208 C44 184 62 176 86 176 C108 176 126 184 132 208 Z" class="icon"/>
+  <path d="M86 208 C90 184 110 176 136 176 C160 176 176 186 182 208 Z" class="icon"/>
+
+  <line x1="200" y1="165" x2="260" y2="165" class="line"/>
+
+  <rect x="268" y="90" width="230" height="150" rx="12" class="lb"/>
+  <text x="310" y="126" class="label">Load Balancer / VIP</text>
+  <circle cx="382" cy="170" r="8" fill="#fff" stroke="#174ea6" stroke-width="3"/>
+  <circle cx="352" cy="202" r="8" fill="#fff" stroke="#174ea6" stroke-width="3"/>
+  <circle cx="412" cy="202" r="8" fill="#fff" stroke="#174ea6" stroke-width="3"/>
+  <path d="M382 178 L382 190 M382 190 L352 194 M382 190 L412 194" stroke="#174ea6" stroke-width="3" fill="none"/>
+  <text x="326" y="260" class="small">HTTPS: 443</text>
+  <text x="294" y="284" class="small">รองรับ .com และ .co.th</text>
+
+  <line x1="498" y1="165" x2="560" y2="165" class="line"/>
+
+  <rect x="560" y="72" width="720" height="34" rx="8" class="header"/>
+  <text x="812" y="95" font-family="Segoe UI,Arial" font-size="16" font-weight="700" fill="#fff">New NAM Appliance Group (4 Appliances)</text>
+
+  <rect x="570" y="106" width="700" height="156" rx="10" class="panel"/>
+
+  <rect x="600" y="130" width="140" height="106" rx="10" class="nam"/>
+  <rect x="656" y="142" width="28" height="28" rx="4" fill="#fff" stroke="#174ea6" stroke-width="2"/>
+  <path d="M662 150 H678 M662 158 H678 M662 166 H678" stroke="#174ea6" stroke-width="2"/>
+  <text x="636" y="190" class="label">AM01</text>
+  <text x="620" y="214" class="mono">10.239.200.21</text>
+  <text x="616" y="234" class="small">accessmanager01</text>
+
+  <rect x="766" y="130" width="140" height="106" rx="10" class="nam"/>
+  <rect x="822" y="142" width="28" height="28" rx="4" fill="#fff" stroke="#174ea6" stroke-width="2"/>
+  <path d="M828 150 H844 M828 158 H844 M828 166 H844" stroke="#174ea6" stroke-width="2"/>
+  <text x="802" y="190" class="label">AM02</text>
+  <text x="786" y="214" class="mono">10.239.200.22</text>
+  <text x="782" y="234" class="small">accessmanager02</text>
+
+  <rect x="932" y="130" width="140" height="106" rx="10" class="nam"/>
+  <rect x="988" y="142" width="28" height="28" rx="4" fill="#fff" stroke="#174ea6" stroke-width="2"/>
+  <path d="M994 150 H1010 M994 158 H1010 M994 166 H1010" stroke="#174ea6" stroke-width="2"/>
+  <text x="968" y="190" class="label">AM03</text>
+  <text x="952" y="214" class="mono">10.239.200.31</text>
+  <text x="948" y="234" class="small">accessmanager03</text>
+
+  <rect x="1098" y="130" width="140" height="106" rx="10" class="nam"/>
+  <rect x="1154" y="142" width="28" height="28" rx="4" fill="#fff" stroke="#174ea6" stroke-width="2"/>
+  <path d="M1160 150 H1176 M1160 158 H1176 M1160 166 H1176" stroke="#174ea6" stroke-width="2"/>
+  <text x="1134" y="190" class="label">AM04</text>
+  <text x="1118" y="214" class="mono">10.239.200.32</text>
+  <text x="1114" y="234" class="small">accessmanager04</text>
+  <text x="1132" y="252" class="small">No Console</text>
+
+  <line x1="1280" y1="165" x2="1340" y2="165" class="line"/>
+
+  <rect x="1340" y="80" width="190" height="190" rx="12" class="dir"/>
+  <text x="1388" y="120" class="label">eDirectory</text>
+  <text x="1378" y="144" class="small">(Identity Source)</text>
+  <rect x="1412" y="174" width="54" height="38" rx="5" fill="#fff" stroke="#1c7a49" stroke-width="2"/>
+  <path d="M1422 184 H1456 M1422 194 H1456 M1422 204 H1456" stroke="#1c7a49" stroke-width="2"/>
+  <text x="1368" y="242" class="mono">10.252.71.42</text>
+  <text x="1368" y="262" class="mono">10.252.71.43</text>
+
+  <rect x="620" y="292" width="520" height="88" rx="12" class="aa"/>
+  <path d="M716 312 L744 322 L740 348 C734 360 724 366 716 370 C708 366 698 360 692 348 L688 322 Z" class="shield"/>
+  <path d="M704 342 L714 352 L732 328" class="check"/>
+  <text x="770" y="322" class="label">AA / MFA</text>
+  <text x="770" y="346" class="small">Existing in Phase 1-6</text>
+  <text x="770" y="368" class="small">Migrate in Phase 7</text>
+  <text x="958" y="360" class="mono">10.253.105.56 / 10.253.105.57</text>
+
+  <path d="M640 330 C560 330 540 270 610 250" class="dash"/>
+  <path d="M1100 330 C1240 330 1320 270 1370 246" class="dash"/>
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#173b72"/>
+    </marker>
+    <style>
+      .bg{fill:#f7fbff}.panel{fill:#fff;stroke:#c8d6ea;stroke-width:2}.old{fill:#eef5ff;stroke:#4d7fca;stroke-width:2}.new{fill:#ecfff4;stroke:#239b63;stroke-width:2}.warn{fill:#fff7e8;stroke:#d9902f;stroke-width:2}.title{font:700 30px Segoe UI,Arial;fill:#082d63}.sub{font:500 18px Segoe UI,Arial;fill:#405066}.h{font:700 19px Segoe UI,Arial;fill:#082d63}.t{font:500 15px Segoe UI,Arial;fill:#1f2a3a}.s{font:500 13px Consolas,monospace;fill:#10233f}.line{stroke:#173b72;stroke-width:3;fill:none;marker-end:url(#arrow)}.dash{stroke:#d06b00;stroke-width:3;stroke-dasharray:8 7;fill:none;marker-end:url(#arrow)}.pool{fill:#ffffff;stroke:#9ab4d7;stroke-width:2}.vip{fill:#f4f8ff;stroke:#8bb2f2;stroke-width:1.5}.vip2{fill:#fff7ed;stroke:#d9902f;stroke-width:1.5}.pill{fill:#0f4da8}.pill2{fill:#15935d}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="820" rx="32"/>
+  <text x="48" y="58" class="title">Solution Architecture: thailandpost.com and thailandpost.co.th</text>
+  <text x="48" y="90" class="sub">Concept only: keep thailandpost.com running, build thailandpost.co.th NAM Appliance, and connect both by SAML during transition.</text>
+
+  <rect x="48" y="128" width="450" height="620" rx="26" class="panel"/>
+  <rect x="70" y="148" width="190" height="32" rx="16" class="pill"/>
+  <text x="92" y="170" font-family="Segoe UI,Arial" font-size="15" font-weight="700" fill="#fff">thailandpost.com</text>
+  <text x="76" y="220" class="h">User / Browser</text>
+  <text x="76" y="246" class="t">*.thailandpost.com</text>
+  <line x1="260" y1="235" x2="330" y2="235" class="line"/>
+  <rect x="335" y="190" width="128" height="90" rx="16" class="old"/>
+  <text x="357" y="224" class="h">LB / VIP</text>
+  <text x="350" y="250" class="s">10.253.105.50</text>
+  <text x="350" y="270" class="s">10.253.105.51</text>
+  <line x1="398" y1="280" x2="398" y2="330" class="line"/>
+  <rect x="76" y="332" width="386" height="288" rx="20" class="old"/>
+  <text x="100" y="370" class="h">thailandpost.com NAM Pool</text>
+  <rect x="102" y="395" width="150" height="92" rx="14" class="pool"/>
+  <text x="122" y="422" class="h">IDP Pool</text>
+  <text x="122" y="448" class="s">IDP1 10.253.105.92</text>
+  <text x="122" y="470" class="s">IDP2 10.253.105.93</text>
+  <rect x="286" y="395" width="150" height="92" rx="14" class="pool"/>
+  <text x="306" y="422" class="h">AG Pool</text>
+  <text x="306" y="448" class="s">AG1 10.253.105.94</text>
+  <text x="306" y="470" class="s">AG2 10.253.105.95</text>
+  <rect x="102" y="514" width="334" height="72" rx="14" class="vip"/>
+  <text x="122" y="543" class="h">Admin Console</text>
+  <text x="122" y="568" class="s">10.253.105.90 / 10.253.105.91</text>
+
+  <rect x="552" y="128" width="496" height="620" rx="26" class="panel"/>
+  <rect x="574" y="148" width="220" height="32" rx="16" class="pill2"/>
+  <text x="596" y="170" font-family="Segoe UI,Arial" font-size="15" font-weight="700" fill="#fff">thailandpost.co.th</text>
+  <text x="584" y="220" class="h">User / Browser</text>
+  <text x="584" y="246" class="t">praiai / portal / sso.thailandpost.co.th</text>
+  <line x1="840" y1="235" x2="914" y2="235" class="line"/>
+  <rect x="920" y="190" width="92" height="90" rx="16" class="new"/>
+  <text x="937" y="224" class="h">LB</text>
+  <text x="936" y="250" class="s">443</text>
+  <text x="932" y="270" class="s">8443</text>
+  <line x1="966" y1="280" x2="966" y2="330" class="line"/>
+  <rect x="584" y="332" width="428" height="308" rx="20" class="new"/>
+  <text x="608" y="370" class="h">thailandpost.co.th NAM Appliance</text>
+  <text x="608" y="394" class="t">Active pool handles normal traffic;</text>
+  <text x="608" y="414" class="t">standby pool takes over if active fails.</text>
+  <rect x="610" y="440" width="178" height="74" rx="14" class="pool"/>
+  <text x="628" y="466" class="h">Appliance 01</text>
+  <text x="628" y="488" class="s">10.239.200.21</text>
+  <text x="628" y="508" class="s">IDP+AG+Console</text>
+  <rect x="806" y="440" width="178" height="74" rx="14" class="pool"/>
+  <text x="824" y="466" class="h">Appliance 02</text>
+  <text x="824" y="488" class="s">10.239.200.22</text>
+  <text x="824" y="508" class="s">IDP+AG+Console</text>
+  <rect x="610" y="536" width="178" height="74" rx="14" class="pool"/>
+  <text x="628" y="562" class="h">Appliance 03</text>
+  <text x="628" y="584" class="s">10.239.200.31</text>
+  <text x="628" y="604" class="s">IDP+AG+Console</text>
+  <rect x="806" y="536" width="178" height="74" rx="14" class="pool"/>
+  <text x="824" y="562" class="h">Appliance 04</text>
+  <text x="824" y="584" class="s">10.239.200.32</text>
+  <text x="824" y="604" class="s">IDP+AG, no Console</text>
+
+  <rect x="1100" y="128" width="452" height="620" rx="26" class="panel"/>
+  <text x="1130" y="184" class="h">Transition Link</text>
+  <text x="1130" y="212" class="t">Use SAML bridge; do not share cookies across domains.</text>
+  <line x1="498" y1="390" x2="552" y2="390" class="dash"/>
+  <line x1="1048" y1="390" x2="1100" y2="390" class="dash"/>
+  <rect x="1130" y="260" width="382" height="138" rx="18" class="warn"/>
+  <text x="1154" y="294" class="h">SAML Federation</text>
+  <text x="1154" y="322" class="t">thailandpost.com authenticates through</text>
+  <text x="1154" y="344" class="t">the thailandpost.co.th NAM.</text>
+  <text x="1154" y="372" class="s">.com NAM SP  ->  .co.th IdP  ->  Assertion</text>
+  <rect x="1130" y="438" width="382" height="210" rx="18" class="vip2"/>
+  <text x="1154" y="472" class="h">Additional .com VIP on appliances</text>
+  <text x="1154" y="502" class="t">Add one thailandpost.com VIP per appliance</text>
+  <text x="1154" y="524" class="t">if THP wants appliance-level VIP.</text>
+  <text x="1154" y="552" class="s">10.239.200.21 VIP: confirm</text>
+  <text x="1154" y="576" class="s">10.239.200.22 VIP: confirm</text>
+  <text x="1154" y="600" class="s">10.239.200.31 VIP: confirm</text>
+  <text x="1154" y="624" class="s">10.239.200.32 VIP: confirm</text>
+</svg>

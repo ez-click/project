@@ -1,0 +1,65 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="780" viewBox="0 0 1600 780">
+  <defs>
+    <marker id="arr" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#173b72"/></marker>
+    <style>
+      .bg{fill:#f7fbff}.box{fill:#fff;stroke:#c8d6ea;stroke-width:2}.old{fill:#eef5ff;stroke:#4d7fca;stroke-width:2}.new{fill:#ecfff4;stroke:#239b63;stroke-width:2}.vip{fill:#fff7ed;stroke:#d9902f;stroke-width:2}.line{stroke:#173b72;stroke-width:3;fill:none;marker-end:url(#arr)}.split{stroke:#6b7a90;stroke-width:2;stroke-dasharray:7 7}.t1{font:700 30px Segoe UI,Arial;fill:#082d63}.h{font:700 18px Segoe UI,Arial;fill:#082d63}.t{font:500 15px Segoe UI,Arial;fill:#1f2a3a}.m{font:500 13px Consolas,monospace;fill:#10233f}.tag{font:700 13px Segoe UI,Arial;fill:#fff}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="780" rx="32"/>
+  <text x="50" y="58" class="t1">NAM Server Diagram - thailandpost.com and thailandpost.co.th</text>
+  <text x="50" y="88" class="t">Simple view only: user traffic goes to LB/VIP, then Active pool; Standby pool takes traffic when Active pool fails.</text>
+
+  <rect x="50" y="125" width="720" height="590" rx="28" class="box"/>
+  <rect x="78" y="150" width="238" height="32" rx="16" fill="#0f4da8"/>
+  <text x="104" y="172" class="tag">thailandpost.com</text>
+  <text x="330" y="160" class="h">User / Browser</text>
+  <line x1="400" y1="180" x2="400" y2="230" class="line"/>
+  <rect x="310" y="235" width="180" height="72" rx="16" class="old"/>
+  <text x="340" y="266" class="h">Load Balancer / VIP</text>
+  <text x="318" y="290" class="m">10.253.105.50 / 10.253.105.51</text>
+  <line x1="400" y1="307" x2="400" y2="355" class="line"/>
+  <line x1="210" y1="355" x2="590" y2="355" class="split"/>
+  <line x1="210" y1="355" x2="210" y2="395" class="line"/>
+  <line x1="590" y1="355" x2="590" y2="395" class="line"/>
+  <text x="122" y="340" class="h">Active Pool</text>
+  <text x="500" y="340" class="h">Standby Pool</text>
+  <rect x="90" y="396" width="250" height="232" rx="20" class="old"/>
+  <rect x="460" y="396" width="250" height="232" rx="20" class="old"/>
+  <rect x="112" y="438" width="206" height="72" rx="14" class="box"/>
+  <text x="130" y="466" class="h">IDP1</text><text x="130" y="490" class="m">10.253.105.92</text>
+  <rect x="112" y="528" width="206" height="72" rx="14" class="box"/>
+  <text x="130" y="556" class="h">AG1</text><text x="130" y="580" class="m">10.253.105.94</text>
+  <rect x="482" y="438" width="206" height="72" rx="14" class="box"/>
+  <text x="500" y="466" class="h">IDP2</text><text x="500" y="490" class="m">10.253.105.93</text>
+  <rect x="482" y="528" width="206" height="72" rx="14" class="box"/>
+  <text x="500" y="556" class="h">AG2</text><text x="500" y="580" class="m">10.253.105.95</text>
+  <text x="120" y="662" class="m">Console: 10.253.105.90 / 10.253.105.91</text>
+
+  <rect x="830" y="125" width="720" height="590" rx="28" class="box"/>
+  <rect x="858" y="150" width="238" height="32" rx="16" fill="#15935d"/>
+  <text x="884" y="172" class="tag">thailandpost.co.th</text>
+  <text x="1115" y="160" class="h">User / Browser</text>
+  <line x1="1180" y1="180" x2="1180" y2="230" class="line"/>
+  <rect x="1080" y="235" width="200" height="72" rx="16" class="new"/>
+  <text x="1110" y="266" class="h">LB / Listener</text>
+  <text x="1110" y="290" class="m">443 App/SSO, 8443 Admin</text>
+  <line x1="1180" y1="307" x2="1180" y2="355" class="line"/>
+  <line x1="990" y1="355" x2="1370" y2="355" class="split"/>
+  <line x1="990" y1="355" x2="990" y2="395" class="line"/>
+  <line x1="1370" y1="355" x2="1370" y2="395" class="line"/>
+  <text x="906" y="340" class="h">Active Pool</text>
+  <text x="1288" y="340" class="h">Standby Pool</text>
+  <rect x="870" y="396" width="280" height="232" rx="20" class="new"/>
+  <rect x="1238" y="396" width="280" height="232" rx="20" class="new"/>
+  <rect x="896" y="420" width="112" height="162" rx="14" class="box"/>
+  <text x="914" y="442" class="m">NAM</text><text x="906" y="462" class="m">Appliance 01</text><text x="906" y="486" class="m">10.239.200.21</text><text x="914" y="508" class="m">IDP+AG</text><text x="912" y="528" class="m">Console</text><text x="904" y="550" class="m">VIP .com</text><text x="908" y="570" class="m">THP confirm</text>
+  <rect x="1018" y="420" width="112" height="162" rx="14" class="box"/>
+  <text x="1036" y="442" class="m">NAM</text><text x="1028" y="462" class="m">Appliance 02</text><text x="1028" y="486" class="m">10.239.200.22</text><text x="1036" y="508" class="m">IDP+AG</text><text x="1034" y="528" class="m">Console</text><text x="1026" y="550" class="m">VIP .com</text><text x="1030" y="570" class="m">THP confirm</text>
+  <rect x="1264" y="420" width="112" height="162" rx="14" class="box"/>
+  <text x="1282" y="442" class="m">NAM</text><text x="1274" y="462" class="m">Appliance 03</text><text x="1274" y="486" class="m">10.239.200.31</text><text x="1282" y="508" class="m">IDP+AG</text><text x="1280" y="528" class="m">Console</text><text x="1272" y="550" class="m">VIP .com</text><text x="1276" y="570" class="m">THP confirm</text>
+  <rect x="1386" y="420" width="112" height="162" rx="14" class="box"/>
+  <text x="1404" y="442" class="m">NAM</text><text x="1396" y="462" class="m">Appliance 04</text><text x="1396" y="486" class="m">10.239.200.32</text><text x="1404" y="508" class="m">IDP+AG</text><text x="1394" y="528" class="m">No Console</text><text x="1392" y="550" class="m">VIP .com</text><text x="1396" y="570" class="m">THP confirm</text>
+  <rect x="898" y="614" width="590" height="38" rx="14" class="vip"/>
+  <text x="916" y="639" class="h">Additional .com VIP: 1 extra IP per NAM Appliance (THP confirm).</text>
+</svg>
+

@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>แนวทาง Implement SSO สำหรับ thailandpost.co.th</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23174ea6'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-size='13' font-family='Arial' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root{
+      --bg:#fff8f1;
+      --panel:#ffffff;
+      --ink:#1f2430;
+      --muted:#667085;
+      --line:#f0d8c2;
+      --blue:#123f96;
+      --blue-dark:#0b2f68;
+      --sky:#eef5ff;
+      --green:#138a46;
+      --green-bg:#eaf8f0;
+      --orange:#f37021;
+      --orange-bg:#fff2e8;
+      --red:#c8192e;
+      --red-dark:#981325;
+      --gold:#ffcc32;
+      --shadow:0 18px 45px rgba(130,54,18,.13);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", Tahoma, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(243,112,33,.20), transparent 34rem),
+        radial-gradient(circle at top right, rgba(200,25,46,.13), transparent 34rem),
+        var(--bg);
+      line-height:1.65;
+    }
+    a{color:inherit}
+    code{
+      font-family:"Cascadia Mono","Consolas",monospace;
+      background:#eef5ff;
+      border:1px solid #cfe1fb;
+      border-radius:8px;
+      padding:1px 6px;
+      white-space:nowrap;
+    }
+    .container{max-width:1180px;margin:auto;padding:0 22px}
+    .hero{
+      padding:46px 0 34px;
+      color:#fff;
+      background:
+        linear-gradient(135deg,#8f1124 0%,#c8192e 42%,#f37021 100%);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      right:-120px;
+      top:-150px;
+      width:410px;
+      height:410px;
+      border-radius:50%;
+      border:46px solid rgba(255,204,50,.18);
+    }
+    .hero .container{position:relative;z-index:1}
+    .eyebrow{
+      display:inline-flex;
+      border:1px solid rgba(255,204,50,.42);
+      background:rgba(255,204,50,.16);
+      border-radius:999px;
+      padding:7px 12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:13px;
+    }
+    h1{
+      margin:16px 0 12px;
+      max-width:980px;
+      font-size:44px;
+      line-height:1.14;
+      letter-spacing:-.025em;
+    }
+    .hero p{margin:0;max-width:930px;color:#e7f0ff;font-size:18px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .btn{
+      border:1px solid rgba(255,255,255,.24);
+      background:rgba(255,255,255,.13);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .btn.secondary{background:#fff;color:#981325}
+    nav.sticky{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(255,250,245,.92);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    nav .container{display:flex;gap:10px;overflow:auto;padding-top:10px;padding-bottom:10px}
+    nav a{
+      white-space:nowrap;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:800;
+      color:#5a2530;
+      background:#fff2e8;
+      border:1px solid #ffd6bd;
+      border-radius:999px;
+      padding:8px 12px;
+    }
+    section{padding:28px 0}
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .section-title h2{margin:0;color:var(--red-dark);font-size:30px;line-height:1.2}
+    .section-title p{margin:6px 0 0;color:var(--muted)}
+    .grid{display:grid;gap:18px}
+    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .four{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+    .card.flat{box-shadow:none}
+    .card h3{margin:0 0 10px;color:#7f1422;font-size:22px}
+    .card h4{margin:18px 0 8px;color:#7f1422;font-size:18px}
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      border-radius:999px;
+      padding:6px 11px;
+      font-weight:800;
+      font-size:13px;
+      border:1px solid #dce7f5;
+      background:#fff2e8;
+      color:#981325;
+      white-space:nowrap;
+    }
+    .badge.green{background:var(--green-bg);border-color:#bce7cb;color:var(--green)}
+    .badge.orange{background:var(--orange-bg);border-color:#ffc39d;color:#b64d12}
+    .callout{
+      border-radius:20px;
+      padding:16px 18px;
+      border:1px solid var(--line);
+      background:#f9fbff;
+    }
+    .callout.green{background:var(--green-bg);border-color:#bce7cb}
+    .callout.orange{background:var(--orange-bg);border-color:#ffd6a6}
+    .callout.blue{background:var(--sky);border-color:#c6ddfb}
+    .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .pill{font-size:13px;border:1px solid #dce7f5;background:#f6f9fe;border-radius:999px;padding:6px 10px;color:#375070;font-weight:800}
+    .diagram-card{overflow:hidden;padding:0}
+    .diagram-card header{
+      padding:18px 20px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+    }
+    .diagram-card header h3{margin:0;font-size:19px;color:#7f1422}
+    .diagram-frame{background:#fffaf5;padding:14px}
+    .diagram-frame img{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:16px;
+      border:1px solid #d7e3f7;
+      background:#fff;
+      cursor:zoom-in;
+    }
+    .flow-mini{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:stretch;margin-top:12px}
+    .node{
+      border:1px solid #cfe0f5;
+      background:#fff;
+      border-radius:18px;
+      padding:16px;
+      text-align:center;
+      min-height:96px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      box-shadow:0 10px 30px rgba(30,70,130,.08);
+    }
+    .node strong{color:#0e3470;display:block;font-size:17px}
+    .arrow{display:flex;align-items:center;color:#174ea6;font-size:28px;font-weight:900}
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#fff}
+    th,td{padding:14px 15px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+    th{background:#981325;color:#fff;font-size:15px}
+    tr:last-child td{border-bottom:0}
+    td:first-child{font-weight:800;color:#142b54;width:24%}
+    .modal{position:fixed;inset:0;background:rgba(4,13,30,.82);z-index:50;display:none;align-items:center;justify-content:center;padding:26px}
+    .modal.open{display:flex}
+    .modal img{max-width:96vw;max-height:88vh;border-radius:12px;background:#fff}
+    .modal button{position:absolute;top:16px;right:18px;border:0;border-radius:999px;background:#fff;color:#102544;font-weight:900;font-size:18px;padding:8px 13px;cursor:pointer}
+    .footer{padding:28px 0 48px;color:#62708a;font-size:13px;text-align:center}
+    @media (max-width:900px){
+      h1{font-size:32px}
+      .two,.three,.four{grid-template-columns:1fr}
+      .flow-mini{grid-template-columns:1fr}
+      .arrow{justify-content:center;transform:rotate(90deg)}
+      .section-title{display:block}
+    }
+    @media print{
+      body{background:#fff}
+      .hero,nav,.btn{display:none!important}
+      .card{box-shadow:none;break-inside:avoid}
+      .diagram-frame img{border:1px solid #aaa}
+      .modal{display:none!important}
+      .container{max-width:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">THAILAND POST SSO MIGRATION PROPOSAL</div>
+      <h1>แนวทาง Implement SSO เพื่อรองรับ thailandpost.co.th</h1>
+      <p>
+        เอกสารนี้นำเสนอแนวทางปรับระบบ NetIQ Access Manager เพื่อรองรับการย้ายบริการจาก
+        <strong>thailandpost.com</strong> ไปยัง <strong>thailandpost.co.th</strong>
+        โดยแสดงภาพรวม architecture, server overview, SSO transition flow และรายการข้อมูลที่ต้องยืนยันร่วมกับ THP ก่อนดำเนินการจริง
+      </p>
+      <div class="hero-actions">
+        <a class="btn secondary" href="#diagrams">Architecture Diagrams</a>
+        <a class="btn" href="#plan">Implementation Plan</a>
+        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sticky">
+    <div class="container">
+      <a href="#objective">วัตถุประสงค์</a>
+      <a href="#baseline">ข้อมูลระบบ</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#diagrams">ไดอะแกรม</a>
+      <a href="#sso-flow">SSO Flow</a>
+      <a href="#plan">แผนงาน</a>
+      <a href="#confirm">ต้องยืนยัน</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="objective">
+      <div class="section-title">
+        <div>
+          <h2>1. วัตถุประสงค์การนำเสนอ</h2>
+          <p>นำเสนอแนวทางด้าน architecture และแผนดำเนินงานสำหรับการย้ายบริการไปยัง thailandpost.co.th</p>
+        </div>
+        <span class="badge green">Target: thailandpost.co.th</span>
+      </div>
+      <div class="grid three">
+        <div class="card">
+          <h3>รองรับบริการบนโดเมนใหม่</h3>
+          <p>นำเสนอ target architecture สำหรับระบบ SSO / NAM เพื่อรองรับบริการภายใต้ <code>thailandpost.co.th</code></p>
+        </div>
+        <div class="card">
+          <h3>รองรับช่วง Transition</h3>
+          <p>แสดงแนวทางให้ระบบ <code>thailandpost.com</code> และ <code>thailandpost.co.th</code> ทำงานร่วมกันระหว่างการย้ายบริการ</p>
+        </div>
+        <div class="card">
+          <h3>กำหนดแนวทางดำเนินงาน</h3>
+          <p>สรุปขั้นตอน implement, test, cutover และข้อมูลที่ต้องยืนยันร่วมกับ THP ก่อนดำเนินการ production</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="baseline">
+      <div class="section-title">
+        <div>
+          <h2>2. ข้อมูลระบบอ้างอิง</h2>
+          <p>สรุปรายการ component และ IP address ที่ใช้เป็น baseline สำหรับการออกแบบและการหารือร่วมกับ THP</p>
+        </div>
+        <span class="badge">Document / IP List Based</span>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <h3>thailandpost.com</h3>
+          <p>ระบบปัจจุบันที่ยังรองรับบริการระหว่าง migration</p>
+          <div class="pillrow">
+            <span class="pill">LB 10.253.105.50 / 10.253.105.51</span>
+            <span class="pill">Console 10.253.105.90 / 10.253.105.91</span>
+            <span class="pill">IDP 10.253.105.92 / 10.253.105.93</span>
+            <span class="pill">AG 10.253.105.94 / 10.253.105.95</span>
+            <span class="pill">AA 10.253.105.56 / 10.253.105.57</span>
+            <span class="pill">SSPR 10.253.105.59</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>thailandpost.co.th</h3>
+          <p>NAM Appliance สำหรับ target environment ของ <code>thailandpost.co.th</code></p>
+          <div class="pillrow">
+            <span class="pill">accessmanager01 10.239.200.21</span>
+            <span class="pill">accessmanager02 10.239.200.22</span>
+            <span class="pill">accessmanager03 10.239.200.31</span>
+            <span class="pill">accessmanager04 10.239.200.32</span>
+          </div>
+          <div class="callout green" style="margin-top:14px">
+            NAM Appliance IP 10.239.200.21, 10.239.200.22 และ 10.239.200.31 มี Administration Console + IDP + AG ส่วน NAM Appliance IP 10.239.200.32 ใช้ IDP + AG และไม่มี Administration Console
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="section-title">
+        <div>
+          <h2>3. Architecture Overview</h2>
+          <p>ภาพรวมการเปลี่ยนผ่านจาก thailandpost.com ไปยัง thailandpost.co.th โดยแยกข้อมูลที่ต้องยืนยันด้าน DNS, LB และ network policy</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="flow-mini">
+          <div class="node"><strong>User / Browser</strong><span>เข้าใช้งานบริการผ่านชื่อโดเมน</span></div>
+          <div class="arrow">›</div>
+          <div class="node"><strong>Load Balancer / VIP</strong><span>ยืนยัน Listener, DNS, VIP และ Port Mapping ร่วมกับ THP</span></div>
+          <div class="arrow">›</div>
+          <div class="node"><strong>NAM Appliance</strong><span>รับ SSO / Reverse Proxy / Portal ตามโดเมนที่กำหนด</span></div>
+        </div>
+        <div class="grid three" style="margin-top:18px">
+          <div class="callout blue">
+            <strong>App / SSO</strong><br />
+            ใช้ HTTPS 443 สำหรับ app, login, portal, SAML และ OIDC
+          </div>
+          <div class="callout orange">
+            <strong>Admin Console</strong><br />
+            ใช้ HTTPS 8443 และจำกัดเฉพาะ Admin network โดย target เฉพาะ IP 10.239.200.21, 10.239.200.22 และ 10.239.200.31
+          </div>
+          <div class="callout green">
+            <strong>Cookie Domain</strong><br />
+            ฝั่งระบบใหม่ใช้ <code>.thailandpost.co.th</code> ไม่แชร์ cookie ข้าม root domain กับ <code>.com</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="diagrams">
+      <div class="section-title">
+        <div>
+          <h2>4. ไดอะแกรม</h2>
+          <p>ชุดไดอะแกรมสำหรับอธิบาย current state, target state, dual environment และ SSO transition flow ในการประชุม</p>
+        </div>
+        <span class="badge orange">เลือกภาพเพื่อขยายรายละเอียด</span>
+      </div>
+      <div class="grid two">
+        <article class="card diagram-card">
+          <header>
+            <h3>Current State Server Diagram</h3>
+            <span class="badge">thailandpost.com</span>
+          </header>
+          <div class="diagram-frame">
+            <img src="assets/current-state-server-diagram.svg" alt="Current state server diagram for thailandpost.com NAM" data-zoom />
+          </div>
+        </article>
+        <article class="card diagram-card">
+          <header>
+            <h3>Target State Server Diagram</h3>
+            <span class="badge">Authentication Center</span>
+          </header>
+          <div class="diagram-frame">
+            <img src="assets/target-state-server-diagram.svg" alt="Target state server diagram for NAM Authentication Center" data-zoom />
+          </div>
+        </article>
+        <article class="card diagram-card">
+          <header>
+            <h3>Dual Environment Server Diagram</h3>
+            <span class="badge">Transition view</span>
+          </header>
+          <div class="diagram-frame">
+            <img src="assets/dual-environment-server-diagram.svg" alt="Dual environment server diagram for thailandpost.com and thailandpost.co.th" data-zoom />
+          </div>
+        </article>
+        <article class="card diagram-card">
+          <header>
+            <h3>Server Diagram: thailandpost.com + thailandpost.co.th</h3>
+            <span class="badge">NAM Appliance only</span>
+          </header>
+          <div class="diagram-frame">
+            <img src="assets/nam-server-diagram-v4.svg" alt="NAM server diagram for thailandpost.com and thailandpost.co.th" data-zoom />
+          </div>
+        </article>
+        <article class="card diagram-card">
+          <header>
+            <h3>Solution Architecture</h3>
+            <span class="badge">Connected view</span>
+          </header>
+          <div class="diagram-frame">
+            <img src="assets/solution-architecture-v3.svg" alt="Solution architecture for thailandpost.com and thailandpost.co.th" data-zoom />
+          </div>
+        </article>
+        <article class="card diagram-card">
+          <header>
+            <h3>Integration Diagram</h3>
+            <span class="badge">Transition link</span>
+          </header>
+          <div class="diagram-frame">
+            <img src="assets/integration-diagram.svg?v=3" alt="Integration diagram between existing and target NAM environments" data-zoom />
+          </div>
+        </article>
+        <article class="card diagram-card">
+          <header>
+            <h3>SSO / SAML Flow</h3>
+            <span class="badge">Flow view</span>
+          </header>
+          <div class="diagram-frame">
+            <img src="assets/sso_flow_phase1.svg?v=3" alt="SSO flow between thailandpost.com and thailandpost.co.th" data-zoom />
+          </div>
+        </article>
+        <article class="card diagram-card">
+          <header>
+            <h3>Transition Architecture</h3>
+            <span class="badge">Cutover concept</span>
+          </header>
+          <div class="diagram-frame">
+            <img src="assets/transition_architecture-v3.svg" alt="Transition architecture for domain migration" data-zoom />
+          </div>
+        </article>
+        <article class="card diagram-card">
+          <header>
+            <h3>Current thailandpost.com Reference</h3>
+            <span class="badge">Baseline</span>
+          </header>
+          <div class="diagram-frame">
+            <img src="assets/current_com_architecture.svg?v=3" alt="Current thailandpost.com NAM reference" data-zoom />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="sso-flow">
+      <div class="section-title">
+        <div>
+          <h2>5. SSO Flow ช่วง Transition</h2>
+          <p>แนวทางหลักคือใช้ federation ระหว่างระบบเดิมและระบบใหม่ โดยไม่ใช้การแชร์ cookie ข้าม root domain</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="flow-mini">
+          <div class="node"><strong>thailandpost.com</strong><span>รองรับบริการเดิมที่ยังอยู่ในช่วง migration</span></div>
+          <div class="arrow">›</div>
+          <div class="node"><strong>SAML Federation</strong><span>เชื่อม authentication ระหว่าง current และ target environment</span></div>
+          <div class="arrow">›</div>
+          <div class="node"><strong>thailandpost.co.th</strong><span>NAM Appliance รองรับบริการเป้าหมายหลัง migration</span></div>
+        </div>
+        <div class="callout orange" style="margin-top:18px">
+          <strong>ประเด็นที่ต้องตรวจสอบก่อน implementation:</strong>
+          ค่า SAML metadata, Entity ID, certificate, NameID, attribute mapping, logout URL และ timeout ต้องยืนยันจาก configuration จริง
+        </div>
+      </div>
+    </section>
+
+    <section id="plan">
+      <div class="section-title">
+        <div>
+          <h2>6. Implementation Plan</h2>
+          <p>ลำดับงานที่เสนอสำหรับการเตรียมระบบ ทดสอบ transition และดำเนินการ cutover ไปยัง thailandpost.co.th</p>
+        </div>
+      </div>
+      <div class="card flat" style="padding:0;overflow:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>งานหลัก</th>
+              <th>ผลลัพธ์ที่ต้องได้</th>
+              <th>สิ่งที่ต้องตรวจ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Phase 0<br />เตรียมข้อมูล</td>
+              <td>ยืนยัน DNS, LB Listener, VIP, Port Mapping, certificate และ firewall route</td>
+              <td>รายการค่าที่ THP ยืนยันพร้อมนำไปตั้งค่า</td>
+              <td>DNS, route, certificate, health check, admin access</td>
+            </tr>
+            <tr>
+              <td>Phase 1<br />ตั้งระบบใหม่</td>
+              <td>ตั้งค่า NAM Appliance IP 10.239.200.21, 10.239.200.22, 10.239.200.31 และ 10.239.200.32 แล้วกำหนด service สำหรับ <code>thailandpost.co.th</code></td>
+              <td>ระบบใหม่พร้อมรับ UAT</td>
+              <td>443, 8443, node health, cookie domain, admin console เฉพาะ IP 10.239.200.21, 10.239.200.22 และ 10.239.200.31</td>
+            </tr>
+            <tr>
+              <td>Phase 2<br />เชื่อม SSO</td>
+              <td>ตั้ง federation / SAML ระหว่างระบบเดิมและระบบใหม่ตาม configuration จริง</td>
+              <td>ผู้ใช้สามารถใช้งาน flow SSO ระหว่างโดเมนได้ตามแผน migration</td>
+              <td>SAML metadata, NameID, attribute, certificate, logout, timeout</td>
+            </tr>
+            <tr>
+              <td>Phase 3<br />Cutover</td>
+              <td>ย้ายบริการไป <code>thailandpost.co.th</code> และทยอย retire หรือ redirect บริการ <code>thailandpost.com</code></td>
+              <td>บริการหลักใช้งานผ่านโดเมนใหม่</td>
+              <td>redirect loop, bookmark, monitoring, audit, user support</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="confirm">
+      <div class="section-title">
+        <div>
+          <h2>7. ข้อมูลที่ต้องยืนยันร่วมกับ THP</h2>
+          <p>รายการข้อมูลด้าน network, DNS, security และ SSO configuration ที่ต้องยืนยันก่อนเริ่ม implementation</p>
+        </div>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <h3>Network / DNS / LB</h3>
+          <ul>
+            <li>DNS name ที่จะใช้งานจริง เช่น app, portal, sso และ admin</li>
+            <li>VIP / Listener สำหรับ <code>thailandpost.co.th</code></li>
+            <li>กรณีใช้ VIP เดียวหลาย hostname ต้องยืนยัน SNI / HTTP Host / LB policy</li>
+            <li>Port Mapping สำหรับ 443, 8443 และ management port ที่จำเป็น</li>
+            <li>Firewall route ระหว่าง user, LB, NAM, AA, SSPR และ user source</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>NAM / SSO Configuration</h3>
+          <ul>
+            <li>Cookie Domain ของระบบใหม่: <code>.thailandpost.co.th</code></li>
+            <li>Admin Console target เฉพาะ <code>10.239.200.21</code>, <code>10.239.200.22</code>, <code>10.239.200.31</code></li>
+            <li>SAML / OIDC endpoint และ certificate ที่ใช้จริง</li>
+            <li>AA / MFA และ SSPR flow ที่จะใช้ระหว่าง migration</li>
+            <li>แผน retire หรือ redirect สำหรับบริการ <code>thailandpost.com</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer container">
+    Prepared for THP SSO / NAM domain migration discussion. Final DNS, VIP, listener, firewall and SSO configuration values require joint confirmation before implementation.
+  </div>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <button onclick="closeModal()">ปิด ×</button>
+    <img id="modalImg" alt="diagram preview" />
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    document.querySelectorAll('[data-zoom]').forEach((img) => {
+      img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      });
+    });
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      modalImg.src = '';
+    }
+    modal.addEventListener('click', (event) => {
+      if(event.target === modal) closeModal();
+    });
+    window.addEventListener('keydown', (event) => {
+      if(event.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>

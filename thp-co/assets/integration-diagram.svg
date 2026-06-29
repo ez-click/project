@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="720" viewBox="0 0 1600 720">
+  <defs>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#173b72"/></marker>
+    <style>
+      .bg{fill:#f7fbff}.zone{fill:#fff;stroke:#c8d6ea;stroke-width:2}.old{fill:#eef5ff;stroke:#4d7fca;stroke-width:2}.new{fill:#ecfff4;stroke:#239b63;stroke-width:2}.mid{fill:#fff7ed;stroke:#d9902f;stroke-width:2}.line{stroke:#173b72;stroke-width:3;fill:none;marker-end:url(#a)}.back{stroke:#d06b00;stroke-width:3;stroke-dasharray:8 7;fill:none;marker-end:url(#a)}.t1{font:700 30px Segoe UI,Arial;fill:#082d63}.h{font:700 18px Segoe UI,Arial;fill:#082d63}.t{font:500 15px Segoe UI,Arial;fill:#1f2a3a}.m{font:500 13px Consolas,monospace;fill:#10233f}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="720" rx="32"/>
+  <text x="50" y="58" class="t1">Integration Diagram - thailandpost.com and thailandpost.co.th</text>
+  <text x="50" y="88" class="t">Keep each domain on its own NAM session. Use federation when authentication must cross environments.</text>
+
+  <rect x="70" y="150" width="250" height="110" rx="22" class="zone"/>
+  <text x="116" y="190" class="h">User / Browser</text>
+  <text x="112" y="220" class="t">*.com or *.co.th</text>
+  <line x1="320" y1="205" x2="430" y2="205" class="line"/>
+
+  <rect x="430" y="130" width="290" height="150" rx="24" class="old"/>
+  <text x="464" y="172" class="h">thailandpost.com NAM</text>
+  <text x="464" y="202" class="m">LB 10.253.105.50 / 10.253.105.51</text>
+  <text x="464" y="226" class="m">IDP 10.253.105.92 / 10.253.105.93</text>
+  <text x="464" y="250" class="m">AG  10.253.105.94 / 10.253.105.95</text>
+
+  <rect x="430" y="440" width="290" height="120" rx="24" class="old"/>
+  <text x="464" y="482" class="h">thailandpost.com Identity</text>
+  <text x="464" y="512" class="m">AA 10.253.105.56 / 10.253.105.57</text>
+  <text x="464" y="536" class="m">SSPR 10.253.105.59</text>
+  <line x1="575" y1="280" x2="575" y2="440" class="line"/>
+
+  <rect x="842" y="130" width="330" height="170" rx="24" class="new"/>
+  <text x="878" y="172" class="h">thailandpost.co.th NAM Appliance</text>
+  <text x="878" y="202" class="m">10.239.200.21 + VIP .com TBD</text>
+  <text x="878" y="226" class="m">10.239.200.22 + VIP .com TBD</text>
+  <text x="878" y="250" class="m">10.239.200.31 + VIP .com TBD</text>
+  <text x="878" y="274" class="m">10.239.200.32 + VIP .com TBD</text>
+  <line x1="720" y1="205" x2="842" y2="205" class="line"/>
+
+  <rect x="842" y="430" width="380" height="150" rx="24" class="new"/>
+  <text x="878" y="482" class="h">thailandpost.co.th Services</text>
+  <text x="878" y="512" class="m">App / SSO Listener: 443</text>
+  <text x="878" y="536" class="m">Admin 8443: 10.239.200.21, 10.239.200.22</text>
+  <text x="878" y="560" class="m">Admin 8443: 10.239.200.31</text>
+  <line x1="1007" y1="300" x2="1007" y2="440" class="line"/>
+
+  <rect x="1260" y="250" width="260" height="150" rx="24" class="mid"/>
+  <text x="1292" y="292" class="h">SAML Bridge</text>
+  <text x="1292" y="322" class="t">Use only during transition</text>
+  <text x="1292" y="350" class="m">.com SP  &lt;-&gt;  .co.th IdP</text>
+  <line x1="1172" y1="225" x2="1260" y2="300" class="back"/>
+  <line x1="1260" y1="356" x2="1172" y2="490" class="back"/>
+
+  <rect x="70" y="610" width="1450" height="52" rx="18" class="zone"/>
+  <text x="96" y="643" class="h">Rule: .co.th cookie stays on .thailandpost.co.th, .com cookie stays on .thailandpost.com. No cross-root-domain cookie sharing.</text>
+</svg>

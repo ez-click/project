@@ -1,0 +1,45 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="640" viewBox="0 0 1600 640">
+  <defs>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#173b72"/></marker>
+    <style>
+      .bg{fill:#f7fbff}.old{fill:#eef5ff;stroke:#4d7fca;stroke-width:2}.new{fill:#ecfff4;stroke:#239b63;stroke-width:2}.mid{fill:#fff7ed;stroke:#d9902f;stroke-width:2}.line{stroke:#173b72;stroke-width:3;fill:none;marker-end:url(#a)}.back{stroke:#d06b00;stroke-width:3;stroke-dasharray:8 7;fill:none;marker-end:url(#a)}.t1{font:700 30px Segoe UI,Arial;fill:#082d63}.h{font:700 18px Segoe UI,Arial;fill:#082d63}.t{font:500 15px Segoe UI,Arial;fill:#1f2a3a}.m{font:500 13px Consolas,monospace;fill:#10233f}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="640" rx="32"/>
+  <text x="50" y="58" class="t1">Transition Architecture: thailandpost.com and thailandpost.co.th</text>
+  <text x="50" y="88" class="t">Short version: thailandpost.co.th starts as the front door, then federates to thailandpost.com identity until cutover is complete.</text>
+
+  <rect x="80" y="160" width="300" height="220" rx="24" class="old"/>
+  <text x="110" y="204" class="h">thailandpost.com</text>
+  <text x="110" y="236" class="m">IDP 10.253.105.92 / 10.253.105.93</text>
+  <text x="110" y="260" class="m">AG 10.253.105.94 / 10.253.105.95</text>
+  <text x="110" y="284" class="m">Console 10.253.105.90 / 10.253.105.91</text>
+  <text x="110" y="318" class="t">Still serves .com apps</text>
+
+  <line x1="380" y1="260" x2="560" y2="260" class="line"/>
+  <rect x="560" y="180" width="280" height="160" rx="24" class="mid"/>
+  <text x="595" y="224" class="h">SAML Bridge</text>
+  <text x="595" y="250" class="t">thailandpost.com</text>
+  <text x="595" y="272" class="t">authenticates through</text>
+  <text x="595" y="294" class="t">the thailandpost.co.th IdP</text>
+  <text x="595" y="320" class="m">Use only during transition</text>
+
+  <line x1="840" y1="260" x2="1020" y2="260" class="line"/>
+  <rect x="1020" y="150" width="490" height="240" rx="24" class="new"/>
+  <text x="1052" y="194" class="h">thailandpost.co.th NAM Appliance</text>
+  <text x="1052" y="226" class="m">10.239.200.21 / 10.239.200.22</text>
+  <text x="1052" y="248" class="m">10.239.200.31 / 10.239.200.32</text>
+  <text x="1052" y="276" class="t">Front door for thailandpost.co.th</text>
+  <text x="1052" y="306" class="m">443 app / SSO</text>
+  <text x="1052" y="330" class="m">8443 admin: 10.239.200.21, 10.239.200.22, 10.239.200.31</text>
+  <text x="1052" y="360" class="t">Cookie stays under .thailandpost.co.th</text>
+
+  <line x1="1265" y1="390" x2="1265" y2="470" class="back"/>
+  <rect x="1020" y="450" width="490" height="100" rx="24" class="old"/>
+  <text x="1052" y="492" class="h">Cutover end state</text>
+  <text x="1052" y="520" class="t">thailandpost.co.th NAM becomes primary IdP.</text>
+  <text x="1052" y="542" class="t">thailandpost.com can retire later.</text>
+</svg>
+
+
+

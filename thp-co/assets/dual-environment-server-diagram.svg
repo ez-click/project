@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560">
+  <defs>
+    <marker id="arr" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#173b72"/>
+    </marker>
+    <style>
+      .bg{fill:#f7fbff}.title{font:700 28px Segoe UI,Arial;fill:#0b2f68}.label{font:700 16px Segoe UI,Arial;fill:#0b2f68}.small{font:500 13px Segoe UI,Arial;fill:#22344f}.mono{font:500 12px Consolas,monospace;fill:#10233f}.oldPanel{fill:#eef5ff;stroke:#4d7fca;stroke-width:2}.newPanel{fill:#ecfff4;stroke:#239b63;stroke-width:2}.bridge{fill:#fff7ed;stroke:#d9902f;stroke-width:2}.box{fill:#fff;stroke:#b9cdea;stroke-width:1.5}.newBox{fill:#fff;stroke:#a7dabc;stroke-width:1.5}.headerOld{fill:#174ea6}.headerNew{fill:#15935d}.line{stroke:#173b72;stroke-width:3;fill:none;marker-end:url(#arr)}.dash{stroke:#d06b00;stroke-width:3;stroke-dasharray:7 7;fill:none;marker-end:url(#arr)}.fade{stroke:#7c8aa0;stroke-width:2;stroke-dasharray:6 7;fill:none;marker-end:url(#arr)}.icon{fill:#174ea6}.server{fill:#fff;stroke:#174ea6;stroke-width:2}.serverNew{fill:#fff;stroke:#15935d;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="560" rx="30"/>
+  <text x="36" y="46" class="title">Dual Environment Server Diagram - thailandpost.com + thailandpost.co.th</text>
+  <text x="36" y="78" class="small">Transition view: thailandpost.com continues serving existing apps while thailandpost.co.th NAM Appliance becomes the target authentication center.</text>
+
+  <text x="74" y="145" class="label">Users</text>
+  <circle cx="76" cy="190" r="18" class="icon"/>
+  <circle cx="116" cy="190" r="18" class="icon"/>
+  <circle cx="96" cy="160" r="18" class="icon"/>
+  <path d="M48 236 C50 212 68 204 92 204 C114 204 132 212 138 236 Z" class="icon"/>
+  <path d="M92 236 C96 212 116 204 142 204 C166 204 182 214 188 236 Z" class="icon"/>
+
+  <line x1="205" y1="198" x2="265" y2="198" class="line"/>
+
+  <rect x="265" y="112" width="430" height="250" rx="18" class="oldPanel"/>
+  <rect x="285" y="132" width="390" height="34" rx="8" class="headerOld"/>
+  <text x="404" y="155" font-family="Segoe UI,Arial" font-size="16" font-weight="700" fill="#fff">thailandpost.com</text>
+  <rect x="292" y="186" width="164" height="68" rx="10" class="box"/>
+  <text x="318" y="214" class="label">LB / VIP</text>
+  <text x="310" y="238" class="mono">10.253.105.50</text>
+  <text x="310" y="256" class="mono">10.253.105.51</text>
+  <rect x="486" y="186" width="164" height="68" rx="10" class="box"/>
+  <text x="522" y="214" class="label">IDP</text>
+  <text x="504" y="238" class="mono">10.253.105.92</text>
+  <text x="504" y="256" class="mono">10.253.105.93</text>
+  <rect x="292" y="274" width="164" height="68" rx="10" class="box"/>
+  <text x="332" y="302" class="label">AG</text>
+  <text x="310" y="326" class="mono">10.253.105.94</text>
+  <text x="310" y="344" class="mono">10.253.105.95</text>
+  <rect x="486" y="274" width="164" height="68" rx="10" class="box"/>
+  <text x="512" y="302" class="label">Console</text>
+  <text x="504" y="326" class="mono">10.253.105.90</text>
+  <text x="504" y="344" class="mono">10.253.105.91</text>
+  <text x="306" y="392" class="small">Role during transition: serve existing .com apps</text>
+
+  <rect x="735" y="176" width="210" height="122" rx="18" class="bridge"/>
+  <text x="782" y="214" class="label">SAML Bridge</text>
+  <text x="776" y="242" class="small">No shared cookie</text>
+  <text x="772" y="268" class="mono">.com SP &lt;-&gt; .co.th IdP</text>
+  <path d="M695 236 C715 220 728 214 735 214" class="dash"/>
+  <path d="M945 214 C965 214 980 220 995 236" class="dash"/>
+
+  <rect x="995" y="112" width="430" height="280" rx="18" class="newPanel"/>
+  <rect x="1015" y="132" width="390" height="34" rx="8" class="headerNew"/>
+  <text x="1120" y="155" font-family="Segoe UI,Arial" font-size="16" font-weight="700" fill="#fff">thailandpost.co.th</text>
+  <rect x="1022" y="186" width="164" height="68" rx="10" class="newBox"/>
+  <text x="1050" y="214" class="label">LB / Listener</text>
+  <text x="1056" y="240" class="mono">443 App / SSO</text>
+  <rect x="1216" y="186" width="164" height="68" rx="10" class="newBox"/>
+  <text x="1240" y="214" class="label">NAM Appliance</text>
+  <text x="1236" y="238" class="mono">10.239.200.21</text>
+  <text x="1236" y="256" class="mono">10.239.200.22</text>
+  <rect x="1022" y="274" width="164" height="68" rx="10" class="newBox"/>
+  <text x="1046" y="302" class="label">NAM Appliance</text>
+  <text x="1042" y="326" class="mono">10.239.200.31</text>
+  <text x="1042" y="344" class="mono">10.239.200.32</text>
+  <rect x="1216" y="274" width="164" height="88" rx="10" class="newBox"/>
+  <text x="1240" y="302" class="label">Admin 8443</text>
+  <text x="1236" y="326" class="mono">10.239.200.21</text>
+  <text x="1236" y="344" class="mono">10.239.200.22</text>
+  <text x="1236" y="362" class="mono">10.239.200.31</text>
+  <text x="1036" y="424" class="small">Target role: authentication center for thailandpost.co.th</text>
+
+  <line x1="1425" y1="236" x2="1480" y2="236" class="line"/>
+  <rect x="1480" y="166" width="96" height="140" rx="12" fill="#eaf8f0" stroke="#bce7cb" stroke-width="2"/>
+  <text x="1498" y="204" class="label">eDir</text>
+  <text x="1490" y="234" class="mono">10.252.71.42</text>
+  <text x="1490" y="256" class="mono">10.252.71.43</text>
+
+  <rect x="700" y="452" width="520" height="72" rx="14" fill="#eef5ff" stroke="#b9cdea" stroke-width="1.5"/>
+  <text x="732" y="482" class="label">Shared supporting services during transition</text>
+  <text x="732" y="508" class="mono">AA/MFA 10.253.105.56 / 10.253.105.57  |  SSPR 10.253.105.59</text>
+  <path d="M520 362 C590 462 640 488 700 488" class="fade"/>
+  <path d="M1170 392 C1185 418 1170 436 1140 452" class="fade"/>
+</svg>
