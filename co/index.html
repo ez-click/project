@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NAM Domain Migration Concept | .com → .co.th</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --panel:#ffffff;
+      --ink:#172033;
+      --muted:#5c667a;
+      --line:#d9e1ef;
+      --blue:#174ea6;
+      --blue2:#0b6bd3;
+      --sky:#e8f2ff;
+      --green:#138a46;
+      --green-bg:#eaf8f0;
+      --orange:#c96712;
+      --orange-bg:#fff3e6;
+      --red:#b83232;
+      --shadow:0 18px 45px rgba(20,35,70,.12);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", Tahoma, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(28,101,211,.18), transparent 34rem),
+        radial-gradient(circle at top right, rgba(19,138,70,.12), transparent 34rem),
+        var(--bg);
+      line-height:1.65;
+    }
+    a{color:inherit}
+    .container{max-width:1180px;margin:auto;padding:0 22px}
+    .hero{
+      padding:44px 0 28px;
+      background:linear-gradient(135deg,#09204f 0%,#154fa8 58%,#0f7db8 100%);
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;right:-110px;top:-140px;width:390px;height:390px;
+      border-radius:50%;border:44px solid rgba(255,255,255,.08)
+    }
+    .eyebrow{font-size:14px;letter-spacing:.12em;text-transform:uppercase;opacity:.8;font-weight:700}
+    h1{margin:10px 0 12px;font-size:42px;line-height:1.15;letter-spacing:-.02em}
+    .hero p{font-size:18px;max-width:920px;margin:0;color:#e7f0ff}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .btn{
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.13);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:700;
+      backdrop-filter:blur(10px);
+      cursor:pointer;
+    }
+    .btn.secondary{background:#fff;color:#12366f}
+    nav.sticky{
+      position:sticky;top:0;z-index:10;background:rgba(255,255,255,.86);
+      backdrop-filter:blur(14px);border-bottom:1px solid var(--line)
+    }
+    nav .container{display:flex;gap:10px;overflow:auto;padding-top:10px;padding-bottom:10px}
+    nav a{white-space:nowrap;text-decoration:none;font-size:14px;font-weight:800;color:#22314c;background:#eef3fb;border:1px solid #dfe8f7;border-radius:999px;padding:8px 12px}
+    section{padding:28px 0}
+    .grid{display:grid;gap:18px}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+    .card.flat{box-shadow:none}
+    .section-title{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px}
+    .section-title h2{margin:0;font-size:30px;line-height:1.18;color:#0e2f68}
+    .section-title p{margin:6px 0 0;color:var(--muted)}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 11px;
+      font-weight:800;font-size:13px;border:1px solid #dce7f5;background:#f2f6fc;color:#173b78
+    }
+    .badge.green{background:var(--green-bg);border-color:#c8ecd6;color:var(--green)}
+    .badge.orange{background:var(--orange-bg);border-color:#ffd6a6;color:var(--orange)}
+    .diagram-card{overflow:hidden;padding:0}
+    .diagram-card header{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .diagram-card header h3{margin:0;font-size:19px;color:#0f3470}
+    .diagram-frame{background:#f8fbff;padding:14px}
+    .diagram-frame img{display:block;width:100%;height:auto;border-radius:16px;border:1px solid #d7e3f7;background:#fff;cursor:zoom-in}
+    h3{margin:0 0 10px;color:#122c5d;font-size:22px}
+    h4{margin:18px 0 8px;color:#143466;font-size:18px}
+    p{margin:0 0 12px}
+    ul,ol{margin-top:8px;padding-left:22px}
+    li{margin:5px 0}
+    .callout{border-radius:20px;padding:16px 18px;border:1px solid var(--line);background:#f9fbff}
+    .callout.green{background:var(--green-bg);border-color:#bce7cb}
+    .callout.orange{background:var(--orange-bg);border-color:#ffd6a6}
+    .callout.blue{background:var(--sky);border-color:#c6ddfb}
+    .keyline{height:1px;background:var(--line);margin:18px 0}
+    .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .pill{font-size:13px;border:1px solid #dce7f5;background:#f6f9fe;border-radius:999px;padding:6px 10px;color:#375070;font-weight:700}
+    .flow-mini{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:stretch;margin-top:12px}
+    .node{border:1px solid #cfe0f5;background:#fff;border-radius:18px;padding:16px;text-align:center;min-height:94px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 10px 30px rgba(30,70,130,.08)}
+    .node strong{color:#0e3470;display:block;font-size:17px}
+    .arrow{display:flex;align-items:center;color:#174ea6;font-size:28px;font-weight:900}
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#fff}
+    th,td{padding:14px 15px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+    th{background:#0f3470;color:#fff;font-size:15px}
+    tr:last-child td{border-bottom:0}
+    td:first-child{font-weight:800;color:#142b54;width:23%}
+    .score{font-weight:900;color:#0f3470}
+    .solution-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .solution-head h2{margin:0;color:#0e2f68;font-size:30px;line-height:1.2}
+    .solution-no{height:54px;width:54px;border-radius:18px;background:linear-gradient(135deg,#154fa8,#0d88d6);color:white;display:grid;place-items:center;font-weight:900;font-size:26px;box-shadow:0 12px 26px rgba(21,79,168,.25)}
+    .split-list{columns:2;column-gap:30px}
+    .footer{padding:28px 0 48px;color:#62708a;font-size:13px;text-align:center}
+    .modal{position:fixed;inset:0;background:rgba(4,13,30,.82);z-index:50;display:none;align-items:center;justify-content:center;padding:26px}
+    .modal.open{display:flex}
+    .modal img{max-width:96vw;max-height:88vh;border-radius:12px;background:#fff}
+    .modal button{position:absolute;top:16px;right:18px;border:0;border-radius:999px;background:#fff;color:#102544;font-weight:900;font-size:18px;padding:8px 13px;cursor:pointer}
+    .print-note{display:none}
+    @media (max-width:900px){
+      h1{font-size:32px}.grid.two,.grid.three,.grid.four{grid-template-columns:1fr}.flow-mini{grid-template-columns:1fr}.arrow{justify-content:center;transform:rotate(90deg)}.split-list{columns:1}.section-title{display:block}
+    }
+    @media print{
+      body{background:#fff}.hero,nav,.btn{display:none!important}.card{box-shadow:none;break-inside:avoid}.diagram-frame img{border:1px solid #aaa}.print-note{display:block}.container{max-width:none}.modal{display:none!important}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">NAM DOMAIN MIGRATION CONCEPT</div>
+      <h1>แนวทางย้ายโดเมนจาก .thailandpost.com เป็น .thailandpost.co.th</h1>
+      <p>สรุป Concept การออกแบบ 2 Solution สำหรับ NetIQ Access Manager: เพิ่ม Reverse Proxy ใหม่บน Access Gateway เดิม หรือแยก Access Gateway Cluster ใหม่ โดยยังใช้ Identity Server / IDP เดิมเป็นศูนย์กลาง SSO</p>
+      <div class="hero-actions">
+        <a class="btn secondary" href="#diagrams">ดูไดอะแกรม</a>
+        <a class="btn" href="#comparison">ดูตารางเปรียบเทียบ</a>
+        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sticky">
+    <div class="container">
+      <a href="#context">ภาพรวม</a>
+      <a href="#sso">SSO ข้ามโดเมน</a>
+      <a href="#diagrams">ไดอะแกรม</a>
+      <a href="#solution1">Solution 1</a>
+      <a href="#solution2">Solution 2</a>
+      <a href="#comparison">เปรียบเทียบ</a>
+      <a href="#recommendation">Recommendation</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="context">
+      <div class="section-title">
+        <div>
+          <h2>1. ภาพรวม Concept</h2>
+          <p>โจทย์คือระบบเดิมใช้โดเมนกลุ่ม .thailandpost.com และต้องย้ายหรือเพิ่มบริการใหม่มาอยู่ใต้ .thailandpost.co.th</p>
+        </div>
+        <span class="badge">Reference: Administrator Technical Manual - THP</span>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <h3>สภาพแวดล้อมเดิม</h3>
+          <p>จากเอกสารเดิม ระบบ NAM มีองค์ประกอบหลักคือ Load Balancer, Identity Server, Access Gateway, Reverse Proxy Application, SAML/OIDC และ MFA/AA โดย Access Gateway ทำหน้าที่เผยแพร่ URL, กำหนด Protected Resource / Policy และบางระบบมี Header Injection</p>
+          <div class="pillrow">
+            <span class="pill">Load Balancer เดิม</span>
+            <span class="pill">Identity Server / IDP เดิม</span>
+            <span class="pill">Access Gateway เดิม</span>
+            <span class="pill">Reverse Proxy Applications</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>ประเด็นหลักของการเปลี่ยนโดเมน</h3>
+          <p>Reverse Proxy แต่ละชุดจะมี Cookie Domain ของตัวเอง เช่น .thailandpost.com หรือ .thailandpost.co.th ดังนั้นถ้าจะใช้ Domain-Based Multi-Homing คนละ root domain ควรแยก Reverse Proxy หรือแยก Access Gateway เพื่อไม่ให้ Cookie Domain ชนกัน</p>
+          <div class="callout orange">
+            <strong>ใจความสำคัญ:</strong> Cookie ของ .com กับ .co.th แชร์กันตรง ๆ ไม่ได้ แต่สามารถทำ SSO ได้ผ่าน Identity Server / IDP เดียวกัน
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sso">
+      <div class="section-title">
+        <div>
+          <h2>2. SSO ระหว่าง .com และ .co.th ทำงานยังไง</h2>
+          <p>IDP เป็นจุด Login กลาง ส่วน Reverse Proxy แต่ละตัวเป็นจุดรับ Traffic และสร้าง Session Cookie ตามโดเมนของตัวเอง</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="flow-mini">
+          <div class="node"><strong>RP เดิม</strong><span>Cookie Domain<br>.thailandpost.com</span></div>
+          <div class="arrow">→</div>
+          <div class="node"><strong>Identity Server / IDP เดิม</strong><span>Login / MFA / Policy<br>SSO Session กลาง</span></div>
+          <div class="arrow">←</div>
+          <div class="node"><strong>RP ใหม่</strong><span>Cookie Domain<br>.thailandpost.co.th</span></div>
+        </div>
+        <div class="keyline"></div>
+        <div class="grid two">
+          <div>
+            <h3>กรณี User เข้า .com ก่อน</h3>
+            <ol>
+              <li>User เข้า URL เดิม เช่น <strong>wlsm.thailandpost.com</strong></li>
+              <li>Reverse Proxy เดิมตรวจสอบ Session ของ .thailandpost.com</li>
+              <li>ถ้ายังไม่มี Session จะ Redirect ไป Identity Server / IDP เดิม</li>
+              <li>User Login สำเร็จ และ IDP สร้าง Session ของ IDP</li>
+              <li>Reverse Proxy เดิม Set Cookie ภายใต้ .thailandpost.com</li>
+            </ol>
+          </div>
+          <div>
+            <h3>กรณี User ต่อมาเข้า .co.th</h3>
+            <ol>
+              <li>User เข้า URL ใหม่ เช่น <strong>praiai.thailandpost.co.th</strong></li>
+              <li>Reverse Proxy ใหม่ตรวจสอบ Session ของ .thailandpost.co.th</li>
+              <li>ถ้ายังไม่มี Session จะ Redirect ไป IDP เดิม</li>
+              <li>IDP เห็นว่า Browser นี้มี IDP Session อยู่แล้ว จึงไม่ถามรหัสซ้ำ</li>
+              <li>Reverse Proxy ใหม่ Set Cookie ภายใต้ .thailandpost.co.th</li>
+            </ol>
+          </div>
+        </div>
+        <div class="callout blue">
+          <strong>สรุป:</strong> SSO ข้ามโดเมนไม่ได้เกิดจากการแชร์ Reverse Proxy Cookie ระหว่าง .com กับ .co.th แต่เกิดจากการใช้ Identity Server / IDP เดียวกันเป็นศูนย์กลาง Login หาก IDP URL เดิมยังใช้งานอยู่ ผู้ใช้ที่มี IDP Session แล้วจะถูก Redirect กลับเข้าโดเมนปลายทางได้โดยไม่ต้อง Login ซ้ำ
+        </div>
+      </div>
+    </section>
+
+    <section id="diagrams">
+      <div class="section-title">
+        <div>
+          <h2>3. ไดอะแกรม Flow การทำงาน</h2>
+          <p>คลิกที่รูปเพื่อขยายดูรายละเอียด</p>
+        </div>
+      </div>
+      <div class="grid two">
+        <article class="card diagram-card">
+          <header>
+            <h3>Solution 1: เพิ่ม Reverse Proxy ใหม่บน AG เดิม</h3>
+            <span class="badge green">ใช้ Infra เดิม</span>
+          </header>
+          <div class="diagram-frame"><img src="assets/solution-1-reverse-proxy.png" alt="Solution 1 diagram: สร้าง Reverse Proxy ใหม่สำหรับ .co.th บน Access Gateway Cluster เดิม" data-zoom></div>
+        </article>
+        <article class="card diagram-card">
+          <header>
+            <h3>Solution 2: ลง Access Gateway Cluster ใหม่</h3>
+            <span class="badge orange">แยก Infra</span>
+          </header>
+          <div class="diagram-frame"><img src="assets/solution-2-new-ag-cluster.png" alt="Solution 2 diagram: ติดตั้ง Access Gateway Server / Cluster ใหม่สำหรับ .co.th" data-zoom></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="solution1">
+      <div class="card">
+        <div class="solution-head">
+          <div>
+            <span class="badge green">Solution 1</span>
+            <h2>สร้าง Reverse Proxy ใหม่สำหรับ .co.th บน Access Gateway Cluster เดิม</h2>
+          </div>
+          <div class="solution-no">1</div>
+        </div>
+        <p>แนวทางนี้ใช้ Access Gateway Cluster เดิมที่มีอยู่ แล้วเพิ่ม Reverse Proxy ใหม่สำหรับโดเมน .thailandpost.co.th โดยกำหนด Cookie Domain เป็น .thailandpost.co.th แยกจาก Reverse Proxy เดิมที่ใช้ .thailandpost.com</p>
+
+        <h3>Concept การทำงาน</h3>
+        <ul>
+          <li>DNS ของ <strong>praiai.thailandpost.co.th</strong> ชี้เข้า Load Balancer / VIP เดิม</li>
+          <li>Access Gateway Cluster เดิมรับ Traffic แล้ว Match กับ Reverse Proxy ใหม่สำหรับ .co.th</li>
+          <li>ถ้า User ยังไม่มี Session ของ .co.th จะ Redirect ไป Identity Server / IDP เดิม</li>
+          <li>หลัง Login สำเร็จ IDP Redirect กลับมายัง URL เดิมที่ User เรียก</li>
+          <li>Access Gateway Set Cookie ภายใต้ <strong>.thailandpost.co.th</strong> แล้ว Forward ไป Backend</li>
+        </ul>
+
+        <h3>ค่าที่ต้องเตรียม / ตั้งค่า</h3>
+        <div class="grid two">
+          <div class="callout blue">
+            <strong>Reverse Proxy ใหม่</strong>
+            <ul>
+              <li>Cookie Domain: <strong>.thailandpost.co.th</strong></li>
+              <li>Published DNS: <strong>praiai.thailandpost.co.th</strong></li>
+              <li>Proxy Service: <strong>PraiAI</strong></li>
+              <li>Multi-Homing: <strong>Domain-Based</strong></li>
+              <li>Host Header: Forward Received Host Name หรือ praiai.thailandpost.co.th</li>
+            </ul>
+          </div>
+          <div class="callout blue">
+            <strong>Backend / Network</strong>
+            <ul>
+              <li>Backend: <strong>10.253.52.107</strong></li>
+              <li>Protocol: <strong>HTTP</strong></li>
+              <li>Port: <strong>80</strong></li>
+              <li>Certificate ต้องครอบคลุม praiai.thailandpost.co.th</li>
+              <li>Protected Resource / Policy ใช้ตาม Requirement</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>จุดเด่น</h3>
+        <ul class="split-list">
+          <li>ทำได้เร็วกว่า เพราะไม่ต้องลง Server เพิ่ม</li>
+          <li>ใช้ Load Balancer / Access Gateway Cluster เดิมได้</li>
+          <li>ประหยัด Infra และลดงาน Operation</li>
+          <li>เหมาะกับการ Migration แบบค่อยเป็นค่อยไป</li>
+          <li>ยังใช้ IDP / MFA / Policy เดิมร่วมกันได้</li>
+        </ul>
+        <h3>ข้อควรระวัง</h3>
+        <ul>
+          <li>ยังอยู่บน AG Cluster เดิมร่วมกับระบบ .com ดังนั้นการ Apply Change ต้องระวังผลกระทบกับบริการเดิม</li>
+          <li>Capacity ของ AG เดิมต้องรองรับ Traffic เพิ่ม</li>
+          <li>ต้องจัดการ Certificate และ DNS ของ .co.th ให้ถูกต้อง</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="solution2">
+      <div class="card">
+        <div class="solution-head">
+          <div>
+            <span class="badge orange">Solution 2</span>
+            <h2>ติดตั้ง Access Gateway Server / Cluster ใหม่สำหรับ .co.th</h2>
+          </div>
+          <div class="solution-no">2</div>
+        </div>
+        <p>แนวทางนี้แยก Access Gateway Cluster ใหม่เพื่อรองรับโดเมน .thailandpost.co.th โดยเฉพาะ ส่วน Identity Server / IDP เดิมยังสามารถใช้ร่วมกันได้ ทำให้แยก Traffic, Change Window, Certificate, Monitoring และ Operation จากระบบ .com เดิมได้ชัดเจนกว่า</p>
+
+        <h3>Concept การทำงาน</h3>
+        <ul>
+          <li>DNS ของ <strong>praiai.thailandpost.co.th</strong> ชี้เข้า VIP / Load Balancer ใหม่ หรือ Pool ใหม่</li>
+          <li>Access Gateway Cluster ใหม่รับ Traffic ของ .co.th โดยเฉพาะ</li>
+          <li>AG ใหม่ผูกกับ Identity Server / IDP เดิมเพื่อใช้งาน Login / MFA / Policy เดิม</li>
+          <li>หลัง Login สำเร็จ IDP Redirect กลับมายัง AG ใหม่</li>
+          <li>AG ใหม่ Set Cookie ภายใต้ <strong>.thailandpost.co.th</strong> แล้ว Forward ไป Backend</li>
+        </ul>
+
+        <h3>ค่าที่ต้องเตรียม / ตั้งค่า</h3>
+        <div class="grid two">
+          <div class="callout blue">
+            <strong>Infrastructure ใหม่</strong>
+            <ul>
+              <li>ติดตั้ง Access Gateway Server / Cluster ใหม่</li>
+              <li>Register AG ใหม่เข้ากับ NAM Admin Console</li>
+              <li>ผูก AG ใหม่กับ Identity Server Cluster เดิม</li>
+              <li>ตั้งค่า Load Balancer / VIP / DNS ใหม่</li>
+              <li>เปิด Firewall ระหว่าง User, LB, AG, IDP และ Backend</li>
+            </ul>
+          </div>
+          <div class="callout blue">
+            <strong>Reverse Proxy ใหม่</strong>
+            <ul>
+              <li>Cookie Domain: <strong>.thailandpost.co.th</strong></li>
+              <li>Published DNS: <strong>praiai.thailandpost.co.th</strong></li>
+              <li>Proxy Service: <strong>PraiAI</strong></li>
+              <li>Backend: <strong>10.253.52.107:80</strong></li>
+              <li>Protocol to Backend: <strong>HTTP</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>จุดเด่น</h3>
+        <ul class="split-list">
+          <li>แยกจากระบบ .com เดิมชัดเจน</li>
+          <li>ลดความเสี่ยงจากการ Apply Change กระทบระบบเดิม</li>
+          <li>เหมาะกับ Production ระยะยาว</li>
+          <li>แยก Monitoring / Log / Operation ได้ง่ายกว่า</li>
+          <li>รองรับการขยายระบบ .co.th เพิ่มเติมในอนาคตได้ดี</li>
+        </ul>
+        <h3>ข้อควรพิจารณา</h3>
+        <ul>
+          <li>ต้องใช้ Server / Resource / IP / VIP / Certificate เพิ่ม</li>
+          <li>ใช้เวลา Implement และ Test มากกว่า Solution 1</li>
+          <li>มีภาระ Operation เพิ่ม เช่น Patch, Backup, Monitoring, DR และ Capacity Planning</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <div class="section-title">
+        <div>
+          <h2>4. ตารางเปรียบเทียบ 2 Solution</h2>
+          <p>มองในมุม Concept, Risk, Infra และการใช้งานระยะยาว</p>
+        </div>
+      </div>
+      <div class="card flat" style="padding:0;overflow:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>หัวข้อ</th>
+              <th>Solution 1: เพิ่ม Reverse Proxy บน AG เดิม</th>
+              <th>Solution 2: ลง AG Cluster ใหม่</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>แนวคิดหลัก</td><td>เพิ่ม Reverse Proxy ใหม่สำหรับ .co.th ใน Access Gateway Cluster เดิม</td><td>แยก Access Gateway Cluster ใหม่สำหรับ .co.th โดยเฉพาะ</td></tr>
+            <tr><td>Identity Server / IDP</td><td>ใช้ IDP เดิมร่วมกัน</td><td>ใช้ IDP เดิมร่วมกัน</td></tr>
+            <tr><td>Cookie Domain</td><td>แยกใน Reverse Proxy ใหม่เป็น .thailandpost.co.th</td><td>แยกบน AG ใหม่เป็น .thailandpost.co.th</td></tr>
+            <tr><td>Load Balancer / VIP</td><td>ใช้ของเดิมได้ ถ้า Capacity และ Routing รองรับ</td><td>แนะนำใช้ VIP / Pool ใหม่เพื่อแยก Traffic</td></tr>
+            <tr><td>ผลกระทบระบบ .com เดิม</td><td>มีโอกาสกระทบมากกว่า เพราะอยู่บน AG Cluster เดิม</td><td>น้อยกว่า เพราะแยก AG Cluster ใหม่</td></tr>
+            <tr><td>ความเร็วในการทำ</td><td><span class="score">เร็วกว่า</span></td><td>ช้ากว่า เพราะต้องติดตั้งและผูกระบบเพิ่ม</td></tr>
+            <tr><td>ค่าใช้จ่าย / Infra</td><td><span class="score">ต่ำกว่า</span></td><td>สูงกว่า ต้องมี Server / VIP / Operation เพิ่ม</td></tr>
+            <tr><td>ความยืดหยุ่นระยะยาว</td><td>เหมาะกับ Migration / Pilot / ใช้ Infra เดิม</td><td><span class="score">เหมาะกับ Production ระยะยาว</span> และการแยกระบบเต็มรูปแบบ</td></tr>
+            <tr><td>Operation</td><td>ดูแลง่ายกว่า เพราะยังอยู่ใน Cluster เดิม</td><td>แยกดูแลได้ชัด แต่มีงาน Operation เพิ่ม</td></tr>
+            <tr><td>เหมาะกับกรณี</td><td>ต้องการทำเร็ว ลด Infra และเปลี่ยนโดเมนแบบค่อยเป็นค่อยไป</td><td>ต้องการแยก Environment ลด Risk และเตรียมใช้ .co.th เป็นระบบหลักระยะยาว</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="recommendation">
+      <div class="section-title">
+        <div>
+          <h2>5. Recommendation / Talking Point</h2>
+          <p>เอาไว้ใช้คุย Concept กับลูกค้าแบบสั้นและชัด</p>
+        </div>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <h3>ถ้าเป้าหมายคือย้ายโดเมนให้เร็ว</h3>
+          <div class="badge green">แนะนำเริ่มที่ Solution 1</div>
+          <p style="margin-top:12px">สร้าง Reverse Proxy ใหม่สำหรับ .co.th บน Access Gateway Cluster เดิมก่อน เพื่อทดสอบ Flow, Cookie Domain, Host Header, Backend และ Policy โดยไม่ต้องลงทุน Infra ใหม่ทันที</p>
+          <div class="callout green"><strong>เหมาะกับ:</strong> Pilot, PoC, Migration ระยะสั้น, บริการที่ Traffic ไม่สูงมาก และต้องการลดระยะเวลาทำงาน</div>
+        </div>
+        <div class="card">
+          <h3>ถ้าเป้าหมายคือใช้ .co.th เป็น Main Domain ระยะยาว</h3>
+          <div class="badge orange">พิจารณา Solution 2</div>
+          <p style="margin-top:12px">ติดตั้ง Access Gateway Cluster ใหม่เพื่อแยกระบบ .co.th ออกจาก .com ชัดเจน ลดความเสี่ยงกระทบระบบเดิม และทำให้ Operation / Monitoring / Change Management แยกกันได้</p>
+          <div class="callout orange"><strong>เหมาะกับ:</strong> Production ระยะยาว, ต้องการแยก Risk, ต้องการรองรับหลายบริการ .co.th ในอนาคต</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <h3>คำถามที่ควร Confirm ก่อนออกแบบจริง</h3>
+        <ul class="split-list">
+          <li>IDP URL ปัจจุบันอยู่ใต้ .com หรือไม่ และมีแผนย้ายเป็น .co.th ด้วยหรือเปล่า</li>
+          <li>ต้องให้ SSO ระหว่าง .com และ .co.th ทำงานต่อช่วง Migration นานเท่าไร</li>
+          <li>จะเปิด .com เป็น Redirect ไป .co.th หรือจะปิดทันทีหลัง Cutover</li>
+          <li>Certificate ที่ใช้รองรับ Wildcard หรือ SAN ของ .co.th แล้วหรือยัง</li>
+          <li>Load Balancer / VIP เดิมรองรับการเพิ่มโดเมน .co.th หรือควรแยก VIP ใหม่</li>
+          <li>Backend ต้องการ Host Header เป็น IP, ชื่อ backend, หรือ Published DNS</li>
+          <li>Protected Resource / Policy / MFA ต้องเหมือนของเดิมหรือมีเงื่อนไขใหม่</li>
+          <li>ต้องการแยก Log / Monitoring / SLA ระหว่าง .com และ .co.th หรือไม่</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer container">
+    <div class="print-note">Generated as static HTML for NAM Domain Migration Concept.</div>
+    <p>Static web concept page · เปิดได้แบบ Offline · ใช้สำหรับคุยแนวทาง Solution และ Migration Concept</p>
+  </div>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <button onclick="closeModal()">ปิด ×</button>
+    <img id="modalImg" alt="diagram preview" />
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    document.querySelectorAll('[data-zoom]').forEach(img => {
+      img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+      });
+    });
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      modalImg.src='';
+    }
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>
